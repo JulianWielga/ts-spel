@@ -164,7 +164,7 @@ const prettyPrint = (ast: Ast) => {
       return `$[${prettyPrint(ast.expression)}]`;
     }
     case "StringLiteral": {
-      const escape = (str: string) => str.replace(`"`, `""`);
+      const escape = (str: string) => str.replaceAll(`"`, `""`);
       return /\r|\n/.exec(ast.value)
         ? `"""${escape(ast.value)}"""`
         : `"${escape(ast.value)}"`;
