@@ -172,13 +172,13 @@ export type Ast =
   | {
       type: "InlineMap";
       elements: {
-        [elem: string]: Ast;
+        [elem: string]: Ast & {start: number, end: number};
       };
       __unclosed?: true;
     }
   | {
       type: "InlineList";
-      elements: Ast[];
+      elements: (Ast & {start: number, end: number})[];
       __unclosed?: true;
     }
   | {

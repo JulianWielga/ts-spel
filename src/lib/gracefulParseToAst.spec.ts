@@ -125,11 +125,15 @@ it("should gracefully unclosed Inline Lists and Maps", () => {
     elements: [
       {
         type: "InlineMap",
+        start: 1,
+        end: 22,
         elements: {
           firstName: {
             nullSafeNavigation: false,
             propertyName: "firstName",
             type: "PropertyReference",
+            start: 12,
+            end: 22,
           },
         },
         __unclosed: true,
@@ -272,8 +276,12 @@ it("should gracefully unclosed Inline Maps", () => {
               date: {
                 type: "StringLiteral",
                 value: "foo",
+                start: 39,
+                end: 45,
               },
               time: {
+                start: 60,
+                end: 63,
                 type: "CompoundExpression",
                 expressionComponents: [
                   {
@@ -307,8 +315,10 @@ it("should gracefully parse an unclosed map inside an unclosed list", () => {
         type: "InlineMap",
         __unclosed: true,
         elements: {
-          f: null as any as Ast,
+          f: null,
         },
+        start: 1,
+        end: 3,
       },
     ],
   });
@@ -325,8 +335,12 @@ it("should gracefully parse an unclosed map inside an unclosed list", () => {
             type: "PropertyReference",
             nullSafeNavigation: false,
             propertyName: "d",
+            start: 5,
+            end: 7,
           },
         },
+        start: 1,
+        end: 7,
       },
     ],
   });
@@ -343,9 +357,13 @@ it("should gracefully parse an unclosed map inside an unclosed list", () => {
             type: "PropertyReference",
             nullSafeNavigation: false,
             propertyName: "d",
+            start: 5,
+            end: 7,
           },
           "": null as any,
         },
+        start: 1,
+        end: 9,
       },
     ],
   });

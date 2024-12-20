@@ -1044,9 +1044,9 @@ export const parse = function (
 
   const inlineListOrMap = function (): Ast | null {
     log("inlineListOrMap");
-    const listElements: Ast[] = [];
+    const listElements: (Ast & { start: number; end: number })[] = [];
     const dict: {
-      [key: string]: Ast;
+      [key: string]: Ast & { start: number; end: number };
     } = {};
 
     /**
@@ -1059,6 +1059,7 @@ export const parse = function (
       // look for comma seperated list items
       if (
         utils.zeroOrMore(() => {
+          const start = index;
           const elem = expression();
           if (elem) {
             // backtrack early if we hit a color: we're in a map
@@ -1070,7 +1071,7 @@ export const parse = function (
               return null;
             }
 
-            listElements.push(elem);
+            listElements.push(elem && { ...elem, start, end: index });
             utils.char(",");
             utils.whitSpc();
             return elem;
@@ -1133,10 +1134,14 @@ export const parse = function (
                 return identInQuotes.value;
               })())
           ) {
-            if (utils.char(":") && ((elem = expression()) || graceful)) {
-              dict[ident] = elem;
-              wasComma = Boolean(utils.char(","));
-              return elem;
+            if (utils.char(":")) {
+              const start = index;
+              elem = expression();
+              if (elem || graceful) {
+                dict[ident] = elem && { ...elem, start, end: index };
+                wasComma = Boolean(utils.char(","));
+                return elem;
+              }
             }
           } else if (wasComma && graceful) {
             // we ended on a ','

@@ -159,18 +159,26 @@ it("Inline Lists", () => {
       {
         type: "NumberLiteral",
         value: 1,
+        start: 1,
+        end: 2,
       },
       {
         type: "NumberLiteral",
         value: 2,
+        start: 3,
+        end: 4,
       },
       {
         type: "NumberLiteral",
         value: 3,
+        start: 5,
+        end: 6,
       },
       {
         type: "NumberLiteral",
         value: 4,
+        start: 7,
+        end: 8,
       },
     ],
   });
@@ -180,10 +188,14 @@ it("Inline Lists", () => {
       {
         type: "StringLiteral",
         value: "a",
+        start: 1,
+        end: 4,
       },
       {
         type: "StringLiteral",
         value: "b",
+        start: 6,
+        end: 9,
       },
     ],
   });
@@ -208,10 +220,14 @@ it("Inline Map", () => {
           type: "NumberLiteral",
           value: 1,
         },
+        start: 5,
+        end: 11,
       },
       bar: {
         type: "NumberLiteral",
         value: 3,
+        start: 17,
+        end: 20,
       },
     },
   });
@@ -296,6 +312,8 @@ it("Parsing: {1}.$[#this % 2 == 0]", () => {
           {
             type: "NumberLiteral",
             value: 1,
+            start: 1,
+            end: 2,
           },
         ],
       },
@@ -331,10 +349,14 @@ it("Inline Lists with negative elements", () => {
       {
         type: "NumberLiteral",
         value: 1,
+        start: 1,
+        end: 2,
       },
       {
         type: "NumberLiteral",
         value: 2,
+        start: 4,
+        end: 5,
       },
       {
         type: "Negative",
@@ -342,6 +364,8 @@ it("Inline Lists with negative elements", () => {
           type: "NumberLiteral",
           value: 3,
         },
+        start: 7,
+        end: 9,
       },
     ],
   });
@@ -373,10 +397,14 @@ it("Parsing: {1, 2, -3}?.$[#this % 2 == 0] ?: -7", () => {
             {
               type: "NumberLiteral",
               value: 1,
+              start: 1,
+              end: 2,
             },
             {
               type: "NumberLiteral",
               value: 2,
+              start: 4,
+              end: 5,
             },
             {
               type: "Negative",
@@ -384,6 +412,8 @@ it("Parsing: {1, 2, -3}?.$[#this % 2 == 0] ?: -7", () => {
                 type: "NumberLiteral",
                 value: 3,
               },
+              start: 7,
+              end: 9,
             },
           ],
         },
@@ -430,6 +460,8 @@ it("Parsing: {1}.![#this * 2]", () => {
           {
             type: "NumberLiteral",
             value: 1,
+            start: 1,
+            end: 2,
           },
         ],
       },
@@ -787,6 +819,8 @@ it("Parsing:  Object with quoted keys ", () => {
       "9ego": {
         type: "NumberLiteral",
         value: 1,
+        start: 8,
+        end: 10,
       },
     },
     type: "InlineMap",
